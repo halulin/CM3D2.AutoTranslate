@@ -338,34 +338,18 @@ namespace CM3D2.AutoTranslate.Plugin
                 _ignoredInputs.Add(line);
 	        }
 	    }
-
-        /*private static float get_ascii_percentage(string str)
-		{
-			int num = 0;
-			int check_len = 0;
-			foreach (var ch in str)
-			{
-				if(!char.IsWhiteSpace(ch)) {
-					check_len++;
-					if (ch >= 0 && ch <= sbyte.MaxValue)
-						++num;
-				}
-			}
-			return num / (float) check_len;
-		}*/
-
-	    /*public static bool IsAsciiText(string txt)
-	    {
-	        return get_ascii_percentage(txt) > 0.8;
-	    }*/
-
+        
         // Modified from https://stackoverflow.com/questions/15805859/detect-japanese-character-input-and-romajis-ascii
+
+        public static bool is_japanese_char(char ch) {
+            return (ch >= 0x3040 && ch <= 0x30FF);   // Within Unicode Hiragana / Katakana Range
+        }
+
         public static bool is_japanese_text(string str)
         {
             foreach (var ch in str)
             {
-                if ((ch >= 0x3040 && ch <= 0x309F)        // Within Unicode Hiragana Range
-                    || (ch >= 0x30A0 && ch <= 0x30FF))    // Within Unicode Katakana Range
+                if (is_japanese_char(ch))
                 {
                     return true;
                 }

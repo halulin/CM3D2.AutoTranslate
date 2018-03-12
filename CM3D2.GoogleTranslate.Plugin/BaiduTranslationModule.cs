@@ -123,7 +123,12 @@ namespace CM3D2.AutoTranslate.Plugin
             var jsonResult = JsonFx.Json.JsonReader.Deserialize<TranslationResult>(www.text);
             Logger.Log(www.text);
             for (int i = 0; i < jsonResult.trans_result.Length; i++) {
-                result += jsonResult.trans_result[i].dst;
+                // Only add non-japanese chars to prevent repeated translation
+                foreach(char ch in jsonResult.trans_result[i].dst) {
+                    if(!AutoTranslatePlugin.is_japanese_char(ch)) {
+                        result += ch;
+                    }
+                }
             }
             result = result.Replace("\\n", "");
 
