@@ -39,6 +39,7 @@
     <Compile Include="CoroutineEx.cs" />
     <Compile Include="ExeTranslatorModule.cs" />
     <Compile Include="GenericServerTranslationModule.cs" />
+    <Compile Include="BaiduTranslationModule.cs" />
     <Compile Include="GoogleTranslationModule.cs" />
     <Compile Include="HookHelper.cs" />
     <Compile Include="Hooks\ITranslationPluginHook.cs" />
