@@ -22,7 +22,7 @@ namespace CM3D2.AutoTranslate.Plugin
 		{
 			Logger.LogError("Executable loading not yet supported!");
 			return false;
-			Logger.Log($"Loading '{_exeName}'", Level.Info);
+			/*Logger.Log($"Loading '{_exeName}'", Level.Info);
 			Process p = new Process()
 			{
 				StartInfo = new ProcessStartInfo(_exeName)
@@ -39,7 +39,7 @@ namespace CM3D2.AutoTranslate.Plugin
 			Logger.Log(p.ToString(), Level.Debug);
 			p.BeginOutputReadLine();
 			p.WaitForExit();
-			return true;
+			return true;*/
 		}
 
 		public override IEnumerator Translate(TranslationData data)

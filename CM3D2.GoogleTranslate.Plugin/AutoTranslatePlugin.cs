@@ -339,7 +339,7 @@ namespace CM3D2.AutoTranslate.Plugin
 	        }
 	    }
 
-        private static float get_ascii_percentage(string str)
+        /*private static float get_ascii_percentage(string str)
 		{
 			int num = 0;
 			int check_len = 0;
@@ -352,14 +352,28 @@ namespace CM3D2.AutoTranslate.Plugin
 				}
 			}
 			return num / (float) check_len;
-		}
+		}*/
 
-	    public static bool IsAsciiText(string txt)
+	    /*public static bool IsAsciiText(string txt)
 	    {
 	        return get_ascii_percentage(txt) > 0.8;
-	    }
+	    }*/
 
-	    public bool ShouldTranslateText(string text)
+        // Modified from https://stackoverflow.com/questions/15805859/detect-japanese-character-input-and-romajis-ascii
+        public static bool is_japanese_text(string str)
+        {
+            foreach (var ch in str)
+            {
+                if ((ch >= 0x3040 && ch <= 0x309F)        // Within Unicode Hiragana Range
+                    || (ch >= 0x30A0 && ch <= 0x30FF))    // Within Unicode Katakana Range
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool ShouldTranslateText(string text)
 	    {
 	        if (_translationDisabledForLevel) return false;
 	        if (!_doTranslations) return false;
@@ -369,7 +383,7 @@ namespace CM3D2.AutoTranslate.Plugin
 
 	        if (text == null || text.Trim().Length == 0)
 	            return false;
-	        return !IsAsciiText(text);
+            return is_japanese_text(text);
 	    }
 
 	    internal TranslationData BuildTranslationData(string text, MonoBehaviour display)

@@ -49,7 +49,7 @@ namespace CM3D2.AutoTranslate.Plugin.Hooks
             var ft = CallOriginalTranslator(sender, e);
             if (
                 ft != null && ft.Trim().Length > 0 
-                && AutoTranslatePlugin.IsAsciiText(ft))
+                && !AutoTranslatePlugin.is_japanese_text(ft))
             {
                 Logger.Log("Already translated by TP", Level.Verbose);
                 return ft;
